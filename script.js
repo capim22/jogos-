@@ -1,96 +1,76 @@
-const sala = new URLSearchParams(window.location.search).get("sala") || "1";
+
+const urlParams = new URLSearchParams(window.location.search);
+const sala = urlParams.get('sala');
 let jogador = localStorage.getItem("jogador_" + sala);
+
 if (!jogador) {
     jogador = prompt("Digite seu nome:");
     localStorage.setItem("jogador_" + sala, jogador);
 }
-document.getElementById("sala-info").textContent = `Sala ${sala} - Jogador: ${jogador}`;
 
-const board = document.getElementById("board");
-const statusDiv = document.getElementById("status");
-let gameState = JSON.parse(localStorage.getItem("jogo_" + sala)) || Array(9).fill("");
-let currentPlayer = localStorage.getItem("turno_" + sala) || "X";
-let gameEnded = false;
+document.getElementById("salaTitulo").innerText = "Sala " + sala + " - Jogador: " + jogador;
 
-function renderBoard() {
-    board.innerHTML = "";
-    gameState.forEach((cell, i) => {
-        const div = document.createElement("div");
-        div.className = "cell";
-        div.textContent = cell;
-        div.addEventListener("click", () => makeMove(i));
-        board.appendChild(div);
-    });
+const tabuleiro = document.getElementById("tabuleiro");
+const mensagens = document.getElementById("mensagens");
+const entrada = document.getElementById("entrada");
+
+let simbolo = localStorage.getItem("simbolo_" + sala);
+if (!simbolo) {
+    simbolo = "X";
+    localStorage.setItem("simbolo_" + sala, simbolo);
+} else {
+    simbolo = simbolo === "X" ? "O" : "X";
+    localStorage.setItem("simbolo_" + sala, simbolo);
 }
 
-function makeMove(i) {
-    if (gameState[i] === "" && !gameEnded) {
-        gameState[i] = currentPlayer;
-        localStorage.setItem("jogo_" + sala, JSON.stringify(gameState));
-        if (checkWinner(currentPlayer)) {
-            statusDiv.textContent = `Vitória de ${jogador} (${currentPlayer})!`;
-            gameEnded = true;
-        } else if (!gameState.includes("")) {
-            statusDiv.textContent = "Empate!";
-            gameEnded = true;
-        } else {
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            localStorage.setItem("turno_" + sala, currentPlayer);
-        }
-        renderBoard();
-    }
-}
+let jogo = ["", "", "", "", "", "", "", "", ""];
+let fim = false;
 
-function checkWinner(p) {
-    const winPatterns = [
+function verificarVencedor() {
+    const combinacoes = [
         [0,1,2],[3,4,5],[6,7,8],
         [0,3,6],[1,4,7],[2,5,8],
         [0,4,8],[2,4,6]
     ];
-    return winPatterns.some(pattern => 
-        pattern.every(i => gameState[i] === p)
-    );
+    for (let c of combinacoes) {
+        if (jogo[c[0]] && jogo[c[0]] === jogo[c[1]] && jogo[c[1]] === jogo[c[2]]) {
+            return jogo[c[0]];
+        }
+    }
+    if (!jogo.includes("")) return "Empate";
+    return null;
 }
 
-window.addEventListener("storage", e => {
-    if (e.key === "jogo_" + sala || e.key === "turno_" + sala) {
-        gameState = JSON.parse(localStorage.getItem("jogo_" + sala)) || Array(9).fill("");
-        currentPlayer = localStorage.getItem("turno_" + sala) || "X";
-        renderBoard();
+function jogar(i) {
+    if (fim || jogo[i]) return;
+    jogo[i] = simbolo;
+    renderizar();
+    const vencedor = verificarVencedor();
+    if (vencedor) {
+        fim = true;
+        document.getElementById("mensagemVitoria").innerText = vencedor === "Empate" ? "Empate!" : `Vitória de ${jogador} (${simbolo})!`;
     }
-});
+}
 
-renderBoard();
-
-// Chat
-const chatForm = document.getElementById("chat-form");
-const chatInput = document.getElementById("chat-input");
-const messages = document.getElementById("messages");
-
-chatForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const msg = chatInput.value;
-    if (msg.trim()) {
-        const dados = JSON.parse(localStorage.getItem("chat_" + sala)) || [];
-        dados.push({ nome: jogador, msg });
-        localStorage.setItem("chat_" + sala, JSON.stringify(dados));
-        chatInput.value = "";
-    }
-});
-
-function renderChat() {
-    const dados = JSON.parse(localStorage.getItem("chat_" + sala)) || [];
-    messages.innerHTML = "";
-    dados.forEach(m => {
-        const div = document.createElement("div");
-        div.textContent = `${m.nome}: ${m.msg}`;
-        messages.appendChild(div);
+function renderizar() {
+    tabuleiro.innerHTML = "";
+    jogo.forEach((v, i) => {
+        const cel = document.createElement("div");
+        cel.className = "celula";
+        cel.innerText = v;
+        cel.onclick = () => jogar(i);
+        tabuleiro.appendChild(cel);
     });
-    messages.scrollTop = messages.scrollHeight;
 }
 
-window.addEventListener("storage", e => {
-    if (e.key === "chat_" + sala) renderChat();
-});
+function enviarMensagem() {
+    const msg = entrada.value.trim();
+    if (msg) {
+        const linha = document.createElement("div");
+        linha.innerText = jogador + ": " + msg;
+        mensagens.appendChild(linha);
+        entrada.value = "";
+    }
+}
 
-renderChat();
+renderizar();

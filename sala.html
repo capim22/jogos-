@@ -1,34 +1,25 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Sala</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Sala</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2 id="titulo"></h2>
-  <div id="jogo">
-    <div class="linha">
-      <div class="celula" data-id="0"></div>
-      <div class="celula" data-id="1"></div>
-      <div class="celula" data-id="2"></div>
+<div class="container centered">
+    <h1 id="salaTitulo">Sala</h1>
+    <div id="tabuleiro" class="tabuleiro"></div>
+    <h2 id="mensagemVitoria"></h2>
+
+    <div class="chat">
+        <h3>Chat</h3>
+        <div id="mensagens" class="mensagens"></div>
+        <input type="text" id="entrada" placeholder="Digite uma mensagem...">
+        <button onclick="enviarMensagem()">Enviar</button>
     </div>
-    <div class="linha">
-      <div class="celula" data-id="3"></div>
-      <div class="celula" data-id="4"></div>
-      <div class="celula" data-id="5"></div>
-    </div>
-    <div class="linha">
-      <div class="celula" data-id="6"></div>
-      <div class="celula" data-id="7"></div>
-      <div class="celula" data-id="8"></div>
-    </div>
-  </div>
-  <div id="chat">
-    <div id="mensagens"></div>
-    <input type="text" id="mensagem" placeholder="Digite uma mensagem...">
-    <button onclick="enviar()">Enviar</button>
-  </div>
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
