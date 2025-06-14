@@ -1,0 +1,43 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+h1 {
+    color: #333;
+}
+.salas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.salas a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+#tabuleiro {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+#tabuleiro td {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000;
+    font-size: 30px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#mensagens {
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    min-height: 50px;
+}
