@@ -1,35 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>CapimChatXO</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Jogo da Velha Online</h1>
-  <div id="login">
-    <input id="username" placeholder="Digite seu nome" />
-    <button onclick="entrar()">Entrar</button>
-  </div>
-
-  <div id="salas" style="display:none;">
-    <h2>Escolha uma sala</h2>
-    <div id="lista-salas"></div>
-  </div>
-
-  <div id="jogo-chat" style="display:none;">
-    <h2 id="sala-atual"></h2>
-    <div id="tabuleiro"></div>
-
-    <div id="chat">
-      <h3>Chat</h3>
-      <div id="mensagens"></div>
-      <input id="mensagem" placeholder="Digite uma mensagem">
-      <button onclick="enviarMensagem()">Enviar</button>
+    <h1 id="sala-info">Sala ? - Jogador: ?</h1>
+    <div id="game-container">
+        <div id="board"></div>
+        <div id="status"></div>
     </div>
-  </div>
-
-  <script src="script.js"></script>
+    <div id="chat-container">
+        <h3>Chat</h3>
+        <div id="messages"></div>
+        <form id="chat-form">
+            <input type="text" id="chat-input" placeholder="Digite uma mensagem" autocomplete="off">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

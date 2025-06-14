@@ -1,46 +1,57 @@
-
 body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #f9f9f9;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
 }
-#tabuleiro {
-  display: grid;
-  grid-template-columns: repeat(3, 80px);
-  gap: 5px;
-  justify-content: center;
-  margin: 20px auto;
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
 }
-.celula {
-  width: 80px;
-  height: 80px;
-  background: white;
-  border: 1px solid #ccc;
-  font-size: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-bottom: 10px;
 }
-#chat {
-  margin-top: 20px;
+.cell {
+    width: 100px;
+    height: 100px;
+    background: white;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid black;
 }
-#mensagens {
-  border: 1px solid #ccc;
-  height: 100px;
-  overflow-y: auto;
-  background: #fff;
-  margin-bottom: 10px;
+#status {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: green;
 }
-.sala {
-  margin: 5px;
-  padding: 10px;
-  background: #e0e0e0;
-  cursor: pointer;
-  display: inline-block;
-  border-radius: 5px;
+#chat-container {
+    max-width: 400px;
+    margin: auto;
 }
-.sala.ocupada {
-  background: #aaa;
-  pointer-events: none;
+#messages {
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 150px;
+    overflow-y: scroll;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+form {
+    display: flex;
+}
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+}
+button {
+    padding: 8px 12px;
 }
