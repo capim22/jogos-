@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Sala</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sala</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    h1 { margin-top: 20px; }
+    #tabuleiro { display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; justify-content: center; margin-top: 20px; }
+    .casa { width: 100px; height: 100px; font-size: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid #000; cursor: pointer; }
+    #mensagem { margin: 20px; font-weight: bold; }
+    #chat { margin-top: 40px; }
+    #mensagens { min-height: 100px; max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
+  </style>
 </head>
 <body>
-  <h1 id="tituloSala">Sala</h1>
+  <h1 id="titulo"></h1>
   <div id="tabuleiro"></div>
+  <div id="mensagem"></div>
+
   <div id="chat">
-    <div id="msgs"></div>
-    <input type="text" id="msgIn"><button id="sendMsg">Enviar</button>
+    <h3>Chat</h3>
+    <div id="mensagens"></div>
+    <input type="text" id="msg" placeholder="Digite uma mensagem" />
+    <button onclick="enviarMensagem()">Enviar</button>
   </div>
-  <script src="firebase.js"></script>
-  <script src="script.js"></script>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>
