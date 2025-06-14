@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sala</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 40px; }
+    table { margin: 20px auto; border-collapse: collapse; }
+    td {
+      width: 60px; height: 60px;
+      font-size: 30px; text-align: center;
+      border: 2px solid #000; cursor: pointer;
+    }
+    #chat { margin-top: 20px; }
+    input[type="text"] { padding: 5px; width: 200px; }
+  </style>
+</head>
+<body>
+  <h2 id="titulo"></h2>
+  <table id="tabuleiro"></table>
+
+  <div id="chat">
+    <h3>Chat</h3>
+    <div id="mensagens"></div>
+    <input type="text" id="mensagem" placeholder="Digite uma mensagem">
+    <button onclick="enviarMensagem()">Enviar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
