@@ -1,55 +1,35 @@
 
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
+  font-family: sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
-.container.centered {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    padding: 20px;
+.container {
+  margin: 30px auto;
+  max-width: 600px;
+}
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 .salas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
-.sala {
-    padding: 10px 20px;
-    background: #007acc;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+.salas button {
+  padding: 14px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-.tabuleiro {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 5px;
-    justify-content: center;
-    margin: 20px 0;
-}
-.celula {
-    width: 100px;
-    height: 100px;
-    background: white;
-    font-size: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #333;
-    cursor: pointer;
-}
-.chat {
-    margin-top: 20px;
-}
-.mensagens {
-    height: 100px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    background: #fff;
-    margin-bottom: 10px;
-    padding: 5px;
+.salas button:hover {
+  background-color: #1976d2;
 }

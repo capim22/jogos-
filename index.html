@@ -1,37 +1,17 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Salas - Jogo da Velha</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capim Jogo da Velha</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container centered">
-        <h1>Escolha uma sala</h1>
-        <div class="salas">
-            <!-- Gera 20 salas numeradas -->
-            <a class="sala" href="sala.html?sala=1">Sala 1</a>
-<a class="sala" href="sala.html?sala=2">Sala 2</a>
-<a class="sala" href="sala.html?sala=3">Sala 3</a>
-<a class="sala" href="sala.html?sala=4">Sala 4</a>
-<a class="sala" href="sala.html?sala=5">Sala 5</a>
-<a class="sala" href="sala.html?sala=6">Sala 6</a>
-<a class="sala" href="sala.html?sala=7">Sala 7</a>
-<a class="sala" href="sala.html?sala=8">Sala 8</a>
-<a class="sala" href="sala.html?sala=9">Sala 9</a>
-<a class="sala" href="sala.html?sala=10">Sala 10</a>
-<a class="sala" href="sala.html?sala=11">Sala 11</a>
-<a class="sala" href="sala.html?sala=12">Sala 12</a>
-<a class="sala" href="sala.html?sala=13">Sala 13</a>
-<a class="sala" href="sala.html?sala=14">Sala 14</a>
-<a class="sala" href="sala.html?sala=15">Sala 15</a>
-<a class="sala" href="sala.html?sala=16">Sala 16</a>
-<a class="sala" href="sala.html?sala=17">Sala 17</a>
-<a class="sala" href="sala.html?sala=18">Sala 18</a>
-<a class="sala" href="sala.html?sala=19">Sala 19</a>
-<a class="sala" href="sala.html?sala=20">Sala 20</a>
-        </div>
-    </div>
+  <div class="container">
+    <h1>Escolha uma Sala</h1>
+    <div id="sala-lista" class="salas"></div>
+  </div>
+  <script src="firebase-config.js" type="module"></script>
+  <script src="salas.js" type="module"></script>
 </body>
 </html>

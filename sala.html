@@ -1,25 +1,20 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Sala</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Sala</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="container centered">
-    <h1 id="salaTitulo">Sala</h1>
-    <div id="tabuleiro" class="tabuleiro"></div>
-    <h2 id="mensagemVitoria"></h2>
-
-    <div class="chat">
-        <h3>Chat</h3>
-        <div id="mensagens" class="mensagens"></div>
-        <input type="text" id="entrada" placeholder="Digite uma mensagem...">
-        <button onclick="enviarMensagem()">Enviar</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
+  <div class="container">
+    <h2 id="sala-titulo"></h2>
+    <div id="jogo" class="tabuleiro"></div>
+    <h3>Chat</h3>
+    <div id="mensagens" class="mensagens"></div>
+    <input type="text" id="mensagem" placeholder="Digite uma mensagem" />
+    <button onclick="enviarMensagem()">Enviar</button>
+  </div>
+  <script src="firebase-config.js" type="module"></script>
+  <script src="sala.js" type="module"></script>
 </body>
 </html>
