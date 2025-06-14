@@ -1,8 +1,46 @@
-body { font-family: sans-serif; padding: 20px; }
-#salas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.sala { display: block; padding: 10px; background: #eee; text-align: center; border-radius: 5px; text-decoration: none; color: black; }
-#jogo { margin: 20px 0; }
-.linha { display: flex; }
-.celula { width: 60px; height: 60px; border: 1px solid black; display: flex; align-items: center; justify-content: center; font-size: 2em; cursor: pointer; }
-#chat { margin-top: 20px; }
-#mensagens { height: 100px; overflow-y: auto; border: 1px solid #ccc; margin-bottom: 10px; padding: 5px; }
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f9f9f9;
+}
+#tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 5px;
+  justify-content: center;
+  margin: 20px auto;
+}
+.celula {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border: 1px solid #ccc;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#chat {
+  margin-top: 20px;
+}
+#mensagens {
+  border: 1px solid #ccc;
+  height: 100px;
+  overflow-y: auto;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.sala {
+  margin: 5px;
+  padding: 10px;
+  background: #e0e0e0;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+}
+.sala.ocupada {
+  background: #aaa;
+  pointer-events: none;
+}

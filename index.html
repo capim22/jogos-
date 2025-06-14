@@ -1,22 +1,35 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Lobby - Jogo da Velha</title>
+  <title>CapimChatXO</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Escolha uma Sala</h1>
-  <div id="salas"></div>
-  <script>
-    const salasDiv = document.getElementById("salas");
-    for (let i = 1; i <= 20; i++) {
-      const link = document.createElement("a");
-      link.href = `sala.html?sala=${i}`;
-      link.className = "sala";
-      link.textContent = `Sala ${i}`;
-      salasDiv.appendChild(link);
-    }
-  </script>
+  <h1>Jogo da Velha Online</h1>
+  <div id="login">
+    <input id="username" placeholder="Digite seu nome" />
+    <button onclick="entrar()">Entrar</button>
+  </div>
+
+  <div id="salas" style="display:none;">
+    <h2>Escolha uma sala</h2>
+    <div id="lista-salas"></div>
+  </div>
+
+  <div id="jogo-chat" style="display:none;">
+    <h2 id="sala-atual"></h2>
+    <div id="tabuleiro"></div>
+
+    <div id="chat">
+      <h3>Chat</h3>
+      <div id="mensagens"></div>
+      <input id="mensagem" placeholder="Digite uma mensagem">
+      <button onclick="enviarMensagem()">Enviar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
