@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>CapimChat Jogo da Velha</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Lobby - Jogo da Velha</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Jogo da Velha com Salas</h1>
-  <div id="salas">
-    <h2>Escolha uma sala:</h2>
-    <ul id="lista-salas"></ul>
-  </div>
-
-  <div id="jogo" style="display:none;">
-    <h2 id="sala-atual"></h2>
-    <div class="board" id="board"></div>
-    <h3>Chat</h3>
-    <div id="chat-box"></div>
-    <input type="text" id="chat-input" placeholder="Digite..." />
-    <button onclick="enviarMensagem()">Enviar</button>
-    <button onclick="sairSala()">Sair da sala</button>
-  </div>
-
-  <script src="script.js"></script>
+  <h1>Escolha uma Sala</h1>
+  <div id="salas"></div>
+  <script>
+    const salasDiv = document.getElementById("salas");
+    for (let i = 1; i <= 20; i++) {
+      const link = document.createElement("a");
+      link.href = `sala.html?sala=${i}`;
+      link.className = "sala";
+      link.textContent = `Sala ${i}`;
+      salasDiv.appendChild(link);
+    }
+  </script>
 </body>
 </html>
