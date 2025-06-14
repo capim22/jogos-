@@ -1,27 +1,28 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Sala</title>
   <style>
-    body { font-family: Arial; text-align: center; }
-    table { margin: auto; border-collapse: collapse; }
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 30px; }
+    table { margin: 10px auto; border-collapse: collapse; }
     td {
-      width: 60px; height: 60px; border: 2px solid #000;
-      font-size: 36px; cursor: pointer;
+      width: 60px; height: 60px;
+      font-size: 40px; text-align: center;
+      border: 2px solid #000; cursor: pointer;
     }
-    #chat { margin-top: 30px; }
+    input, button { margin-top: 10px; padding: 6px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h2 id="info"></h2>
+  <h2 id="titulo"></h2>
   <table id="tabuleiro"></table>
-  <div id="chat">
-    <h3>Chat</h3>
-    <div id="mensagens" style="height:150px; overflow:auto; border:1px solid #ccc; margin: 10px;"></div>
-    <input type="text" id="msg"><button onclick="enviar()">Enviar</button>
-  </div>
+
+  <h3>Chat</h3>
+  <div id="chat"></div>
+  <input type="text" id="mensagem" placeholder="Digite uma mensagem" />
+  <button onclick="enviarMensagem()">Enviar</button>
+
   <script type="module" src="script.js"></script>
 </body>
 </html>

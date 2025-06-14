@@ -1,31 +1,33 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Jogo da Velha - Multiplayer</title>
+  <title>Salas</title>
   <style>
-    body { font-family: Arial; text-align: center; }
-    .sala { margin: 10px; display: inline-block; }
-    input { margin: 10px; }
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    .sala { margin: 10px; }
   </style>
 </head>
 <body>
   <h1>Escolha uma Sala</h1>
-  <input type="text" id="nome" placeholder="Seu nome">
+  <input type="text" id="nome" placeholder="Digite seu nome" />
   <div id="salas"></div>
+
   <script>
-    const salas = document.getElementById("salas");
+    const salasDiv = document.getElementById('salas');
     for (let i = 1; i <= 20; i++) {
-      const div = document.createElement("div");
-      div.className = "sala";
-      div.innerHTML = `<button onclick="entrar(${i})">Sala ${i}</button>`;
-      salas.appendChild(div);
-    }
-    function entrar(sala) {
-      const nome = document.getElementById("nome").value;
-      if (!nome) return alert("Digite seu nome");
-      window.location.href = "sala.html?sala=" + sala + "&nome=" + encodeURIComponent(nome);
+      const btn = document.createElement('button');
+      btn.innerText = 'Sala ' + i;
+      btn.className = 'sala';
+      btn.onclick = () => {
+        const nome = document.getElementById('nome').value.trim();
+        if (!nome) {
+          alert('Digite seu nome primeiro!');
+          return;
+        }
+        window.location.href = 'sala.html?sala=' + i + '&nome=' + encodeURIComponent(nome);
+      };
+      salasDiv.appendChild(btn);
     }
   </script>
 </body>

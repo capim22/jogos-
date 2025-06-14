@@ -1,6 +1,5 @@
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { getDatabase, ref, onValue, set, push } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyACUpW8INZOyd4A0AZ4Ndqv7uM3h0FZYK8",
@@ -15,59 +14,58 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const url = new URLSearchParams(window.location.search);
-const sala = url.get("sala");
-const nome = url.get("nome");
-document.getElementById("info").innerText = `Sala ${sala} - Jogador: ${nome}`;
+const urlParams = new URLSearchParams(window.location.search);
+const sala = urlParams.get("sala");
+const nome = urlParams.get("nome");
 
-const tabuleiro = document.getElementById("tabuleiro");
-let jogadorAtual = "X";
+document.getElementById("titulo").innerText = `Sala ${sala} - Jogador: ${nome}`;
 
-function desenharTabuleiro(estado) {
-  tabuleiro.innerHTML = "";
+const tabuleiroRef = ref(db, `salas/${sala}/tabuleiro`);
+const chatRef = ref(db, `salas/${sala}/chat`);
+
+let simbolo = "X";
+
+function desenharTabuleiro(tabuleiro) {
+  const tabela = document.getElementById("tabuleiro");
+  tabela.innerHTML = "";
   for (let i = 0; i < 3; i++) {
-    const tr = document.createElement("tr");
+    const linha = document.createElement("tr");
     for (let j = 0; j < 3; j++) {
-      const td = document.createElement("td");
-      const valor = estado && estado[i] && estado[i][j] ? estado[i][j] : "";
-      td.textContent = valor;
-      td.onclick = () => jogar(i, j);
-      tr.appendChild(td);
+      const celula = document.createElement("td");
+      celula.innerText = tabuleiro[i][j] || "";
+      celula.onclick = () => {
+        if (!tabuleiro[i][j]) {
+          tabuleiro[i][j] = simbolo;
+          set(tabuleiroRef, tabuleiro);
+          simbolo = simbolo === "X" ? "O" : "X";
+        }
+      };
+      linha.appendChild(celula);
     }
-    tabuleiro.appendChild(tr);
+    tabela.appendChild(linha);
   }
 }
 
-function jogar(i, j) {
-  const refTab = ref(db, "salas/" + sala + "/tabuleiro");
-  onValue(refTab, snapshot => {
-    const estado = snapshot.val() || [[], [], []];
-    if (!estado[i]) estado[i] = [];
-    if (!estado[i][j]) {
-      estado[i][j] = jogadorAtual;
-      set(refTab, estado);
-      jogadorAtual = jogadorAtual === "X" ? "O" : "X";
-    }
-  }, { onlyOnce: true });
-}
-
-const refTab = ref(db, "salas/" + sala + "/tabuleiro");
-onValue(refTab, snapshot => {
-  desenharTabuleiro(snapshot.val());
+onValue(tabuleiroRef, (snapshot) => {
+  const tabuleiro = snapshot.val() || [["", "", ""], ["", "", ""], ["", "", ""]];
+  desenharTabuleiro(tabuleiro);
 });
 
-const mensagens = document.getElementById("mensagens");
-function enviar() {
-  const msg = document.getElementById("msg").value;
-  if (msg.trim() === "") return;
-  push(ref(db, "salas/" + sala + "/chat"), `${nome}: ${msg}`);
-  document.getElementById("msg").value = "";
-}
-onValue(ref(db, "salas/" + sala + "/chat"), snapshot => {
-  mensagens.innerHTML = "";
-  snapshot.forEach(child => {
+onValue(chatRef, (snapshot) => {
+  const div = document.getElementById("chat");
+  div.innerHTML = "";
+  const mensagens = snapshot.val();
+  for (let key in mensagens) {
     const p = document.createElement("p");
-    p.textContent = child.val();
-    mensagens.appendChild(p);
-  });
+    p.innerText = mensagens[key];
+    div.appendChild(p);
+  }
 });
+
+window.enviarMensagem = function () {
+  const msg = document.getElementById("mensagem").value;
+  if (msg.trim()) {
+    push(chatRef, `${nome}: ${msg}`);
+    document.getElementById("mensagem").value = "";
+  }
+};
