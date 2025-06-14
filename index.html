@@ -1,35 +1,32 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Capim Games - Jogo da Velha</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Jogo da Velha - Multiplayer</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    .sala { margin: 10px; display: inline-block; }
+    input { margin: 10px; }
+  </style>
 </head>
 <body>
-    <h1>Capim Games - Jogo da Velha</h1>
-    <h2>Escolha uma sala:</h2>
-    <div class="salas">
-        <!-- Cria 20 salas -->
-        <a href="sala.html?sala=1">Sala 1</a>
-<a href="sala.html?sala=2">Sala 2</a>
-<a href="sala.html?sala=3">Sala 3</a>
-<a href="sala.html?sala=4">Sala 4</a>
-<a href="sala.html?sala=5">Sala 5</a>
-<a href="sala.html?sala=6">Sala 6</a>
-<a href="sala.html?sala=7">Sala 7</a>
-<a href="sala.html?sala=8">Sala 8</a>
-<a href="sala.html?sala=9">Sala 9</a>
-<a href="sala.html?sala=10">Sala 10</a>
-<a href="sala.html?sala=11">Sala 11</a>
-<a href="sala.html?sala=12">Sala 12</a>
-<a href="sala.html?sala=13">Sala 13</a>
-<a href="sala.html?sala=14">Sala 14</a>
-<a href="sala.html?sala=15">Sala 15</a>
-<a href="sala.html?sala=16">Sala 16</a>
-<a href="sala.html?sala=17">Sala 17</a>
-<a href="sala.html?sala=18">Sala 18</a>
-<a href="sala.html?sala=19">Sala 19</a>
-<a href="sala.html?sala=20">Sala 20</a>
-    </div>
+  <h1>Escolha uma Sala</h1>
+  <input type="text" id="nome" placeholder="Seu nome">
+  <div id="salas"></div>
+  <script>
+    const salas = document.getElementById("salas");
+    for (let i = 1; i <= 20; i++) {
+      const div = document.createElement("div");
+      div.className = "sala";
+      div.innerHTML = `<button onclick="entrar(${i})">Sala ${i}</button>`;
+      salas.appendChild(div);
+    }
+    function entrar(sala) {
+      const nome = document.getElementById("nome").value;
+      if (!nome) return alert("Digite seu nome");
+      window.location.href = "sala.html?sala=" + sala + "&nome=" + encodeURIComponent(nome);
+    }
+  </script>
 </body>
 </html>

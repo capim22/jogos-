@@ -1,22 +1,27 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Sala</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Sala</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    table { margin: auto; border-collapse: collapse; }
+    td {
+      width: 60px; height: 60px; border: 2px solid #000;
+      font-size: 36px; cursor: pointer;
+    }
+    #chat { margin-top: 30px; }
+  </style>
 </head>
 <body>
-    <h2 id="salaInfo">Sala - Jogador:</h2>
-    <table id="tabuleiro"></table>
-
+  <h2 id="info"></h2>
+  <table id="tabuleiro"></table>
+  <div id="chat">
     <h3>Chat</h3>
-    <div id="mensagens"></div>
-    <input type="text" id="mensagem" placeholder="Digite uma mensagem">
-    <button onclick="enviarMensagem()">Enviar</button>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="script.js"></script>
+    <div id="mensagens" style="height:150px; overflow:auto; border:1px solid #ccc; margin: 10px;"></div>
+    <input type="text" id="msg"><button onclick="enviar()">Enviar</button>
+  </div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
