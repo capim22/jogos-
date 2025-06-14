@@ -1,34 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Salas do Jogo da Velha</title>
+  <meta charset="UTF-8" />
+  <title>Salas</title>
   <style>
-    body { font-family: Arial, text-align: center; padding-top: 50px; }
-    .sala { margin: 10px; padding: 10px; border: 1px solid #ccc; display: inline-block; width: 100px; }
+    body { font-family: sans-serif; text-align: center; padding-top: 40px; }
+    .sala { margin: 10px; }
+    button { padding: 10px; width: 200px; font-size: 16px; }
   </style>
 </head>
 <body>
   <h1>Escolha uma sala</h1>
-  <input type="text" id="nome" placeholder="Seu nome">
   <div id="salas"></div>
 
   <script>
-    const salasDiv = document.getElementById('salas');
     for (let i = 1; i <= 20; i++) {
       const div = document.createElement('div');
-      div.className = "sala";
-      div.innerHTML = 'Sala ' + i;
-      div.onclick = () => {
-        const nome = document.getElementById('nome').value.trim();
-        if (!nome) {
-          alert('Digite seu nome');
-          return;
+      div.className = 'sala';
+      const btn = document.createElement('button');
+      btn.textContent = 'Sala ' + i;
+      btn.onclick = () => {
+        const nome = prompt("Digite seu nome:");
+        if (nome) {
+          window.location.href = `sala.html?sala=${i}&nome=${encodeURIComponent(nome)}`;
         }
-        window.location.href = `sala.html?sala=${i}&nome=${nome}`;
       };
-      salasDiv.appendChild(div);
+      div.appendChild(btn);
+      document.getElementById('salas').appendChild(div);
     }
   </script>
 </body>
