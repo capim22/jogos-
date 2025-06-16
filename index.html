@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Jogo da Velha Multiplayer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      width: 95vw;
+      max-width: 600px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .login, .game, .salas {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    input, select, button {
+      padding: 12px;
+      margin: 10px;
+      font-size: 1.2em;
+      width: 80%;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+      margin: 20px 0;
+    }
+
+    .cell {
+      width: 90px;
+      height: 90px;
+      background-color: #333;
+      font-size: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #444;
+    }
+
+    #chat {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    #messages {
+      height: 120px;
+      overflow-y: auto;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login" style="display:flex;">
+      <h1>Digite seu nome</h1>
+      <input id="username" placeholder="Seu nome" />
+      <button onclick="showSalas()">Avançar</button>
+    </div>
+
+    <div class="salas">
+      <h1>Escolha uma sala</h1>
+      <select id="salaSelect">
+        <script>
+          for (let i = 1; i <= 10; i++) {
+            document.write(`<option value="Sala ${i}">Sala ${i}</option>`);
+          }
+        </script>
+      </select>
+      <button onclick="startGame()">Entrar</button>
+    </div>
+
+    <div class="game">
+      <h1 id="tituloJogo">Jogo da Velha</h1>
+      <div class="board" id="board"></div>
+
+      <div id="chat">
+        <div id="messages"></div>
+        <input id="msgInput" placeholder="Digite sua mensagem" />
+        <button onclick="sendMsg()">Enviar</button>
+      </div>
+
+      <footer>Criado por Leandro Capim</footer>
+    </div>
+  </div>
+
+  <script>
+    let user = "";
+    let sala = "";
+    let board = Array(9).fill("");
+    let turn = "X";
+    let playing = true;
+
+    function showSalas() {
+      user = document.getElementById("username").value.trim();
+      if (!user) return alert("Digite seu nome");
+      document.querySelector(".login").style.display = "none";
+      document.querySelector(".salas").style.display = "flex";
+    }
+
+    function startGame() {
+      sala = document.getElementById("salaSelect").value;
+      document.querySelector(".salas").style.display = "none";
+      document.querySelector(".game").style.display = "flex";
+      initBoard();
+    }
+
+    function initBoard() {
+      const boardEl = document.getElementById("board");
+      boardEl.innerHTML = "";
+      board = Array(9).fill("");
+      playing = true;
+      turn = "X";
+
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.dataset.index = i;
+        cell.addEventListener("click", cellClick);
+        boardEl.appendChild(cell);
+      }
+    }
+
+    function cellClick(e) {
+      const i = e.target.dataset.index;
+      if (!playing || board[i]) return;
+      board[i] = turn;
+      e.target.textContent = turn;
+      checkWinner();
+      turn = turn === "X" ? "O" : "X";
+    }
+
+    function checkWinner() {
+      const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+
+      for (let [a,b,c] of wins) {
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          alert(`${board[a]} venceu!`);
+          playing = false;
+          setTimeout(initBoard, 2000);
+          return;
+        }
+      }
+
+      if (!board.includes("")) {
+        alert("Empate!");
+        playing = false;
+        setTimeout(initBoard, 2000);
+      }
+    }
+
+    function sendMsg() {
+      const msg = document.getElementById("msgInput").value;
+      if (msg) {
+        const messages = document.getElementById("messages");
+        messages.innerHTML += `<p><strong>${user}:</strong> ${msg}</p>`;
+        document.getElementById("msgInput").value = "";
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
